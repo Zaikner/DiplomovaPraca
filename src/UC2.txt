@@ -1,0 +1,16 @@
+1. Dog barks on the tree.
+
+
+
+1. System displays a list of discount offers.
+2. Customer chooses a specific discount offer.
+3. System displays the discount offer details.
+4. Customer clicks on Add to basket button.
+5. System checks number of available discount offers.
+6. System inserts discount offer to basket.
+7. System harshly displays a list of discount offers.
+inserts(discount_offer) - basket
+
+
+system -> inserts discount offer -> basket
+system -> inserts ->
