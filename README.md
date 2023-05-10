@@ -52,7 +52,7 @@ Ukážkový prípad použitia: <br /> <br />
 1. System displays a list of discount offers. <br /> 
 2. Customer chooses a specific discount offer. <br /> 
 3. System displays the discount offer details. <br /> 
-4. Custome accepts offer. <br /> 
+4. Customer accepts offer. <br /> 
 5. System checks number of available discount offers. <br /> 
 6. System inserts discount offer to basket. <br /> <br /> 
 
