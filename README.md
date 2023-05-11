@@ -32,6 +32,12 @@ svoje riešenie pomocou množiny testovacích dát.<br />
 27.4 - Projektový slovník, Vykreslovanie UML, Prezentácia<br />
 9.5 - Kostra latexu<br />
 
+**Future work:**<br />
+x.07.23 - x.08.23 - Refaktoring
+x.09.23 - Prvé stránky textu, optimalizácia pipeline
+x.10.23 - Loop/Alt.. fragmenty
+x.11.23 - Alternativny tok ?
+
 **Prezentácia:** V repozitári.
 **PDF:** V repozitári.
 **Kostra latexu:** V repozitári.
