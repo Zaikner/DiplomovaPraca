@@ -33,14 +33,14 @@ svoje riešenie pomocou množiny testovacích dát.<br />
 9.5 - Kostra latexu<br />
 
 **Future work:**<br />
-x.07.23 - x.08.23 - Refaktoring
-x.09.23 - Prvé stránky textu, optimalizácia pipeline
-x.10.23 - Loop/Alt.. fragmenty
-x.11.23 - Alternativny tok ?
+x.07.23 - x.08.23 - Refaktoring<br />
+x.09.23 - Prvé stránky textu, optimalizácia pipeline<br />
+x.10.23 - Loop/Alt.. fragmenty<br />
+x.11.23 - Alternativny tok ?(podľa progressu)<br /><br />
 
-**Prezentácia:** V repozitári.
-**PDF:** V repozitári.
-**Kostra latexu:** V repozitári.
+**Prezentácia:** V repozitári.<br />
+**PDF:** V repozitári.<br />
+**Kostra latexu:** V repozitári.<br /><br />
 
 **Progress:**<br />
 Pipeline je rozdelená na 3 časti. Každá časť spracováva Use Case inout metódou NLP.<br />
