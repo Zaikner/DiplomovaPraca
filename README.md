@@ -62,13 +62,13 @@ Výsledok Part of speech časti Pipeliny : <br />
 **Literatúra:**<br />
 Deva Kumar Deeptimahanti a Muhammad Ali Babar. „An automated tool for generating UML models from natural language requirements“. In: 2009 IEEE/ACM
 International Conference on Automated Software Engineering. IEEE. 2009, s. 680–
-682.<br />
+682.<br /><br />
 Abdelsalam M. Maatuk a Esra A. Abdelnabi. „Generating uml use case and activity diagrams using nlp techniques and heuristics rules“. In: International Conference on Data Science, E-learning and Information Systems 2021. 2021, s. 271–
-277.<br />
+277.<br /><br />
 Jitendra Singh Thakur a Atul Gupta. „Automatic generation of sequence diagram
 from use case specification“. In: Proceedings of the 7th India Software Engineering
-Conference. 2014, s. 1–6.<br />
-Song Yang a Houari Sahraoui. „Towards automatically extracting UML class diagrams from natural language specifications“. In: Proceedings of the 25th International Conference on Model Driven Engineering Languages and Systems: Companion Proceedings. 2022, s. 396–403.<br />
+Conference. 2014, s. 1–6.<br /><br />
+Song Yang a Houari Sahraoui. „Towards automatically extracting UML class diagrams from natural language specifications“. In: Proceedings of the 25th International Conference on Model Driven Engineering Languages and Systems: Companion Proceedings. 2022, s. 396–403.<br /><br />
 Tao Yue, Lionel C Briand a Yvan Labiche. „An Automated Approach to Transform
 Use Cases into Activity Diagrams.“ In: ECMFA 10 (2010), s. 337–353.<br />
 
