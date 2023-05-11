@@ -28,7 +28,7 @@ svoje riešenie pomocou množiny testovacích dát.<br />
 28.2 - prezentácia podobných existujúcich riešení, článkov a návrh evaluácie<br />
 14.3- základna prvá pipeline tokenizacia + lemma + OIE<br />
 28.3- úprava podla arch štýlu Chain of Responsibility, získanie use casov na evaluáciu. Návrh parametrizácie. Možnosť osekania času pre processing.<br />
-14.4 - Dependency parsing + Part of speach, krokovani<br />
+14.4 - Dependency parsing + Part of speech, krokovanie<br />
 27.4 - Projektový slovník, Vykreslovanie UML, Prezentácia<br />
 9.5 - Kostra latexu<br />
 
