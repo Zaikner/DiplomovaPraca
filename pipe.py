@@ -1,6 +1,5 @@
 from stanza.server import CoreNLPClient
 import stanza
-from nltk.corpus import wordnet as wn
 
 from DiplomovaPraca.utilities import readFile
 
@@ -14,13 +13,13 @@ def pipeline(object_rule,relation_rule,subject_rule,text):
     subjects = ''
     objects = ''
     relations = ''
-    for sent in doc.sentences:
-        for word in sent.words:
-            print('<text>' + word.text + '</text>')
-            print('<lemma>' + word.lemma + '</lemma>')
-            print('<upos>' + word.upos + '/upos>')
-            print('<xpos>' + word.xpos + '/xpos>')
-            print('<--------------------------->')
+    # for sent in doc.sentences:
+    #     for word in sent.words:
+    #         print('<text>' + word.text + '</text>')
+    #         print('<lemma>' + word.lemma + '</lemma>')
+    #         print('<upos>' + word.upos + '/upos>')
+    #         print('<xpos>' + word.xpos + '/xpos>')
+    #         print('<--------------------------->')
 
     text = (' ').join([word.lemma for sent in doc.sentences for word in sent.words])
 
@@ -55,10 +54,4 @@ def pipeline(object_rule,relation_rule,subject_rule,text):
 
 pipeline(1,1,1,useCase[0])
 
-def synonyms(text):
-    syn = []
-    for sublist in wn.synonyms(text):
-        for i in sublist:
-            syn.append(i)
-    return syn
 
