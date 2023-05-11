@@ -1,0 +1,5 @@
+@startuml 
+actor Filip
+participant Diploma_Thesis
+Filip --> Diploma_Thesis: presents
+@enduml 

@@ -1,0 +1,5 @@
+@startuml
+Black -> red_Credit_Card: pays
+Examples -> exactly_same document: represent
+Meter_Metrology_Board -> reading_data: collects
+@enduml 
