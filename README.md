@@ -74,7 +74,7 @@ Výsledok Part of speech časti Pipeliny : <br />
 Ako sme videli pri pipeline z júna, nie všetky správy boli identifikované správne. Na vine bol NLP engine a model, ktorý nesprávne identifikoval gramatické kategórie slova. 
 
 Výsledok Part of speech časti Pipeliny : <br />
-![POS pipeline - 12.2023](pipeline.png)<br /><br /><br />
+![POS pipeline - 12.2023](sequence2.png)<br /><br /><br />
 
 **Literatúra:**<br />
 Deva Kumar Deeptimahanti a Muhammad Ali Babar. „An automated tool for generating UML models from natural language requirements“. In: 2009 IEEE/ACM
