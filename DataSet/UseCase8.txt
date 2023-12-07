@@ -1,0 +1,10 @@
+1. Employee logs in to the expense management system.
+2. Employee navigates to the "Submit Expense Report" section.
+3. Employee provides details for each expense, including the date, category, description, and amount.
+4. Employee attaches scanned receipts or expense-related documents.
+5. Employee submits the expense report.
+6. Expense Management System acknowledges receipt and assigns a report number.
+7. Employee's manager receives a notification for approval.
+8. Manager reviews the expense report and either approves or rejects it.
+9. If approved, the system processes the reimbursement.
+10. Employee receives a reimbursement confirmation.

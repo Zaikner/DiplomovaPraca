@@ -1,0 +1,10 @@
+1. Customer inserts their ATM card into the card reader.
+2. ATM machine reads the card and prompts for a PIN (Personal Identification Number).
+3. Customer enters their PIN.
+4. ATM machine validates the PIN.
+5. Customer selects the OBJECT option.
+6. Customer specifies the amount of cash to withdraw.
+7. ATM machine checks the account balance.
+8. ATM machine dispenses the requested cash.
+9. Customer takes the cash and the ATM card.
+10. ATM machine updates the account balance.

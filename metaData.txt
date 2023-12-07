@@ -1,0 +1,30 @@
+
+
+
+Date: 2023-12-07 18:01:37.293033
+Project present: False
+Coreference enabled: True
+Step enabled: False
+NLP engine: spacy
+Model: en_core_web_lg
+Processor options: [all]
+Pipeline method: POS
+Messages F1 score: 0.2857142857142857
+Life lines F1 score: 1.0
+Whole F1 score: 0.375
+Text similarity F1 score: 0.9997282435787291
+
+
+
+Date: 2023-12-07 18:01:47.001545
+Project present: False
+Coreference enabled: True
+Step enabled: False
+NLP engine: spacy
+Model: en_core_web_lg
+Processor options: [all]
+Pipeline method: DP
+Messages F1 score: 1.0
+Life lines F1 score: 1.0
+Whole F1 score: 1.0
+Text similarity F1 score: 1.0

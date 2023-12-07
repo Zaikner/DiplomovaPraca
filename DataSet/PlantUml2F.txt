@@ -1,0 +1,23 @@
+@startuml
+actor Customer
+participant System
+participant "Restaurant Staff"
+
+Customer -> System: 1. Select\nMake Reservation
+Customer -> System: 2. Present\nAvailability
+System --> Customer: Availability
+Customer -> System: 3. Select Date & Time
+Customer -> System: 4. Check Availability
+System --> Customer: Availability
+Customer -> System: 5. Specify Party Size
+Customer -> System: 6. Confirm Reservation
+Customer -> System: 7. Send Reservation Request
+Customer <-- System: Reservation Request
+System -> "Restaurant Staff": 8. Receive Reservation Request
+System -> "Restaurant Staff": 9. Check Availability
+activate "Restaurant Staff"
+System -> "Restaurant Staff": 10. Confirm Reservation
+"Restaurant Staff" --> System: Reservation Confirmation
+System --> Customer: Reservation Confirmation
+Customer <-- System: Confirmation
+@enduml

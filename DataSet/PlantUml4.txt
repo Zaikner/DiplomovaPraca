@@ -1,0 +1,33 @@
+@startuml
+actor Customer
+participant "Hotel Booking System"
+
+Customer -> "Hotel Booking System": 1. Access Booking System
+activate "Hotel Booking System"
+
+Customer -> "Hotel Booking System": 2. Enter Destination, Check-In, and Check-Out Dates
+
+"Hotel Booking System" -> "Hotel Booking System": 3. Search for Available Rooms
+activate "Hotel Booking System"
+
+"Hotel Booking System" --> Customer: List of Available Rooms
+
+Customer -> "Hotel Booking System": 4. Select Room
+Customer -> "Hotel Booking System": 5. Provide Guest Information
+
+"Hotel Booking System" -> "Hotel Booking System": 6. Confirm Reservation
+activate "Hotel Booking System"
+
+"Hotel Booking System" --> Customer: Reservation Confirmed
+
+"Hotel Booking System" -> "Hotel Booking System": 7. Reserve Room
+activate "Hotel Booking System"
+
+"Hotel Booking System" -> "Hotel Booking System": 8. Send Confirmation Email
+activate "Hotel Booking System"
+
+"Hotel Booking System" --> Customer: Confirmation Email
+
+deactivate "Hotel Booking System"
+
+@enduml

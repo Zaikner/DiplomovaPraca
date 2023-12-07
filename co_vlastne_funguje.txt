@@ -1,0 +1,13 @@
+inicializacia projektu
+inicializacia configuracie
+nahradzanie "" a znovu vracanie
+POS
+DP
+
+Evaluacia
+Evaluator --> Evaluačny script
+Metadata
+
+
+pridat do evaluatora aj tokenizaciu,lemmatizaciu.......
+taktiez to spustit v spacy

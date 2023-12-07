@@ -1,0 +1,15 @@
+@startuml
+actor Customer
+participant "Support System"
+Customer -> "Support System": 1. Log in
+Customer -> "Support System": 2. Navigate to\nSubmit Support Ticket
+Customer -> "Support System": 3. Provide Title and Description
+Customer -> "Support System": 4. Select Priority
+Customer -> "Support System": 5. Attach Files
+Customer -> "Support System": 6. Submit Ticket
+"Support System" --> Customer: 7. Acknowledge Receipt\n(Ticket #123)
+"Support System" -> "Support System": 8. Send Confirmation Email
+activate "Support System"
+"Support System" --> Customer: 8. Confirmation Email
+"Support System" -> "Support System": 9. Route Ticket to\nAppropriate Team
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+actor Customer
+participant System
+participant "Shopping Cart"
+participant "Discount Offer List"
+
+Customer -> System: Request to view\navailable discount offers
+activate System
+
+System -> "Discount Offer List": Present list of\ndiscount offers
+activate "Discount Offer List"
+System <-- "Discount Offer List": List of discount offers
+
+Customer -> System: Select specific discount offer
+Customer -> System: Accept offer
+activate "Shopping Cart"
+
+System -> "Shopping Cart": Insert discount offer\nto basket
+activate "Shopping Cart"
+System --> "Shopping Cart": Discount offer added to basket
+
+System -> "Discount Offer List": Check number of\navailable discount offers
+System --> "Discount Offer List": Number of available discount offers
+
+@enduml

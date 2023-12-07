@@ -1,0 +1,31 @@
+@startuml
+actor Customer
+participant "ATM Machine"
+
+Customer -> "ATM Machine": 1. Insert ATM Card
+activate "ATM Machine"
+
+"ATM Machine" --> Customer: 2. Prompt for PIN
+
+Customer -> "ATM Machine": 3. Enter PIN
+
+"ATM Machine" -> "ATM Machine": 4. Validate PIN
+
+"ATM Machine" --> Customer: 5. PIN Validated
+
+Customer -> "ATM Machine": 6. Select Withdraw Cash
+
+Customer -> "ATM Machine": 7. Specify Withdrawal Amount
+
+"ATM Machine" -> "ATM Machine": 8. Check Account Balance
+
+"ATM Machine" --> Customer: 9. Account Balance Valid
+
+"ATM Machine" -> "ATM Machine": 10. Dispense Cash
+activate "ATM Machine"
+
+Customer --> "ATM Machine": 11. Take Cash
+"ATM Machine" -> "ATM Machine": 12. Update Account Balance
+
+deactivate "ATM Machine"
+@enduml

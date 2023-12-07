@@ -1,0 +1,12 @@
+1. Customer logs in to the online store.
+2. Customer searches for the desired product.
+3. Online Store displays search results.
+4. Customer selects a product from the search results.
+5. Customer views product details, including price and availability.
+6. Customer adds the product to their shopping cart.
+7. Customer reviews the shopping cart and proceeds to checkout.
+8. Customer provides shipping information.
+9. Customer selects a payment method and provides payment details.
+10. Online Store confirms the order and processes the payment.
+11. Customer receives an order confirmation with the order number.
+12. Online Store updates the inventory to reflect the purchase.

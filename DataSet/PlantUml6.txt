@@ -1,0 +1,24 @@
+startuml
+actor Customer
+participant "Online Store"
+
+Customer -> "Online Store": 1. Log in
+activate "Online Store"
+
+Customer -> "Online Store": 2. Search for Product
+Customer -> "Online Store": 3. Display Search Results
+Customer -> "Online Store": 4. Select Product
+Customer -> "Online Store": 5. View Product Details
+Customer -> "Online Store": 6. Add to Cart
+Customer -> "Online Store": 7. Proceed to Checkout
+Customer -> "Online Store": 8. Provide Shipping Info
+Customer -> "Online Store": 9. Select Payment Method
+Customer -> "Online Store": 10. Provide Payment Details
+
+"Online Store" -> "Online Store": 11. Confirm Order and\nProcess Payment
+activate "Online Store"
+
+"Online Store" --> Customer: 12. Order Confirmation\n(Order #123)
+deactivate "Online Store"
+
+@enduml

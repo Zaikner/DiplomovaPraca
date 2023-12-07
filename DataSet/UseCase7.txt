@@ -1,0 +1,13 @@
+1. Customer logs in to the online booking system.
+2. Customer selects the "Book Flight" option.
+3. Customer provides flight details, including departure and destination airports, departure date, and return date (if applicable).
+4. Online Booking System searches for available flights based on the provided details.
+5. Online Booking System displays a list of available flights.
+6. Customer selects a specific flight from the list.
+7. Customer provides passenger information, including names and contact details.
+8. Customer selects any additional services (e.g., seat preferences, meal options).
+9. Customer proceeds to payment.
+10. Customer selects a payment method and provides payment details.
+11. Online Booking System confirms the booking and issues a booking reference.
+12. Customer receives a booking confirmation email with the booking reference.
+13. Airline updates the seat inventory and booking records.

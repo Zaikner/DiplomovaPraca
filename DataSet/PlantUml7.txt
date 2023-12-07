@@ -1,0 +1,37 @@
+@startuml
+actor Customer
+participant "Online Booking System"
+participant Airline
+
+Customer -> "Online Booking System": 1. Log in
+activate "Online Booking System"
+
+Customer -> "Online Booking System": 2. Select 'Book Flight'
+
+Customer -> "Online Booking System": 3. Provide Flight Details
+
+"Online Booking System" -> "Online Booking System": 4. Search for Available Flights
+activate "Online Booking System"
+
+"Online Booking System" --> Customer: 5. List of Available Flights
+
+Customer -> "Online Booking System": 6. Select Flight
+
+Customer -> "Online Booking System": 7. Provide Passenger Information
+
+"Online Booking System" -> "Online Booking System": 8. Select Additional Services
+activate "Online Booking System"
+
+Customer -> "Online Booking System": 9. Proceed to Payment
+
+Customer -> "Online Booking System": 10. Select Payment Method
+Customer -> "Online Booking System": 11. Provide Payment Details
+
+"Online Booking System" -> Airline: 12. Confirm Booking and\nIssue Booking Reference
+
+"Online Booking System" --> Customer: 12. Booking Confirmation\n(Booking Reference)
+
+"Online Booking System" -> Airline: 13. Update Seat Inventory and Booking Records
+
+deactivate "Online Booking System"
+@enduml

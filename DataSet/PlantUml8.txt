@@ -1,0 +1,33 @@
+@startuml
+actor Employee
+participant "Expense Management System"
+participant Manager
+
+Employee -> "Expense Management System": 1. Log in
+activate "Expense Management System"
+
+Employee -> "Expense Management System": 2. Navigate to\nSubmit Expense Report
+
+Employee -> "Expense Management System": 3. Provide Expense Details
+
+"Expense Management System" -> "Expense Management System": 4. Attach Receipts
+activate "Expense Management System"
+
+Employee -> "Expense Management System": 5. Submit Expense Report
+
+"Expense Management System" --> Employee: 6. Acknowledge Receipt\n(Report #123)
+
+Manager -> "Expense Management System": 7. Receive Notification for Approval
+
+Manager -> "Expense Management System": 8. Review Expense Report
+Manager -> "Expense Management System": 9. Approve or Reject Report
+
+"Expense Management System" --> Manager: 10. Approval/Rejection Notification
+
+"Expense Management System" -> "Expense Management System": 11. Process Reimbursement
+activate "Expense Management System"
+
+"Expense Management System" --> Employee: 12. Reimbursement Confirmation
+
+deactivate "Expense Management System"
+@enduml

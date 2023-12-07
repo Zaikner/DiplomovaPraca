@@ -1,0 +1,9 @@
+1. User logs in to the calendar and scheduling application.
+2. User selects the "Schedule Meeting" option.
+3. User provides meeting details, including title, date, time, duration, and location.
+4. User selects participants from their contacts or enters email addresses.
+5. User sends meeting invitations to the selected participants.
+6. Calendar and Scheduling Application schedules the meeting and sends invitations.
+7. Participants receive meeting invitations via email.
+8. Participants respond to the invitations (Accept, Decline, Tentative).
+9. User and participants receive confirmation of responses.

@@ -1,0 +1,31 @@
+@startuml
+actor User
+participant "Calendar and Scheduling Application"
+participant Participant
+
+User -> "Calendar and Scheduling Application": 1. Log in
+activate "Calendar and Scheduling Application"
+
+User -> "Calendar and Scheduling Application": 2. Schedule Meeting
+
+User -> "Calendar and Scheduling Application": 3. Provide Meeting Details
+
+"Calendar and Scheduling Application" -> "Calendar and Scheduling Application": 4. Select Participants
+activate "Calendar and Scheduling Application"
+
+User -> "Calendar and Scheduling Application": 5. Send Meeting Invitations
+
+"Calendar and Scheduling Application" -> "Calendar and Scheduling Application": 6. Schedule Meeting and\nSend Invitations
+activate "Calendar and Scheduling Application"
+
+"Calendar and Scheduling Application" -> Participant: 7. Receive Meeting Invitation
+
+Participant -> "Calendar and Scheduling Application": 8. Respond to Invitation
+Participant -> "Calendar and Scheduling Application": 9. Response (Accept/Decline/Tentative)
+
+"Calendar and Scheduling Application" --> Participant: 10. Confirmation of Response
+
+"Calendar and Scheduling Application" --> User: 10. Confirmation of Responses
+
+deactivate "Calendar and Scheduling Application"
+@enduml

@@ -1,0 +1,7 @@
+1. Customer requests to view available discount offers.
+2. System displays a list of discount offers.
+3. Customer selects a specific discount offer.
+4. System displays the discount offer details.
+5. Customer accepts the offer.
+6. System inserts the selected discount offer into the customer's shopping cart.
+7. System checks the number of available discount offers.

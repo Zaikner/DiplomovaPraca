@@ -1,0 +1,21 @@
+@startuml
+actor Customer
+participant "Food Delivery Application"
+participant Restaurant
+participant "Delivery Driver"
+Customer -> "Food Delivery Application": 1. Log in
+Customer -> "Food Delivery Application": 2. Search/Select Restaurant
+"Food Delivery Application" -> Restaurant: 3. Display Restaurant Menu
+Customer -> "Food Delivery Application": 4. Add Items to Order
+Customer -> "Food Delivery Application": 5. Provide Order Details
+Customer -> "Food Delivery Application": 6. Review Order and\nProceed to Checkout
+"Food Delivery Application" -> Restaurant: 7. Send Order
+Restaurant --> "Food Delivery Application": 8. Confirm Order and\nProvide Estimated Delivery Time
+"Food Delivery Application" --> Customer: 10. Order Confirmation\n(Estimated Delivery Time)
+"Food Delivery Application" -> "Food Delivery Application": 9. Assign Delivery Driver
+"Food Delivery Application" --> "Delivery Driver": 9. Assign Delivery Driver
+"Delivery Driver" -> Restaurant: 11. Pick Up Order
+"Delivery Driver" --> Customer: 12. Deliver Order
+"Customer" -> "Delivery Driver": 13. Receive Order
+"Customer" -> "Food Delivery Application": 14. Process Payment
+@enduml

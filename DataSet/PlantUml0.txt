@@ -1,0 +1,11 @@
+@startuml DiscountOfferSequenceDiagram
+actor Customer
+participant System
+Customer -> System: 1. Display list of discount offers
+Customer -> System: 2. Choose specific discount offer
+System -> System: 3. Display discount offer details
+Customer -> System: 4. Click on "Add to basket" button
+System -> System: 5. Check number of available discount offers
+System -> System: 6. Insert discount offer to basket
+System -> System: 7. Harshly display a list of discount offers
+@enduml
