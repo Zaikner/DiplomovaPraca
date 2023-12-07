@@ -33,15 +33,15 @@ svoje riešenie pomocou množiny testovacích dát.<br />
 9.5.23 - Kostra latexu<br />
 x.07.23 - x.08.23 - Refaktoring<br />
 x.09.23 - Prvé stránky textu, optimalizácia pipeline<br />
-x.10.23 - Pridanie nového nlp engine, a pridanie všetkych existujúcich konfigurácií aj pre tento engine
-x.11.23 - datasety, evaluacia, evaluačny script, písanie
-x.12.23 - Preskúmať možnosť parametrizácie správ + písanie
+x.10.23 - Pridanie nového nlp engine, a pridanie všetkych existujúcich konfigurácií aj pre tento engine<br />
+x.11.23 - datasety, evaluacia, evaluačny script, písanie<br />
+x.12.23 - Preskúmať možnosť parametrizácie správ + písanie<br /><br />
 
 **Future work:**<br />
 x.1.24 - Loop/Alt.. fragmenty, vylepšovanie vysledkov<br />
 x.2.24 - Algoritmus na nájdenie najlepšie konfiguracie<br />
 x.3.24 - Alternativny tok ?(podľa progressu)<br />
-x.4.24 - Písanie textu práce<br />
+x.4.24 - Písanie textu práce<br /><br />
 **Prezentácia:** V repozitári.<br />
 **PDF:** V repozitári.<br />
 **Kostra latexu:** V repozitári.<br /><br />
