@@ -25,24 +25,29 @@ poskytovať vizualizáciu vytvorených modelov vo forme diagramov. Overte
 svoje riešenie pomocou množiny testovacích dát.<br />
 
 **Denník:**<br />
-28.2 - prezentácia podobných existujúcich riešení, článkov a návrh evaluácie<br />
-14.3- základna prvá pipeline tokenizacia + lemma + OIE<br />
-28.3- úprava podla arch štýlu Chain of Responsibility, získanie use casov na evaluáciu. Návrh parametrizácie. Možnosť osekania času pre processing.<br />
-14.4 - Dependency parsing + Part of speech, krokovanie<br />
-27.4 - Projektový slovník, Vykreslovanie UML, Prezentácia<br />
-9.5 - Kostra latexu<br />
-
-**Future work:**<br />
+28.2.23 - prezentácia podobných existujúcich riešení, článkov a návrh evaluácie<br />
+14.3.23- základna prvá pipeline tokenizacia + lemma + OIE<br />
+28.3.23- úprava podla arch štýlu Chain of Responsibility, získanie use casov na evaluáciu. Návrh parametrizácie. Možnosť osekania času pre processing.<br />
+14.4.23 - Dependency parsing + Part of speech, krokovanie<br />
+27.4.23 - Projektový slovník, Vykreslovanie UML, Prezentácia<br />
+9.5.23 - Kostra latexu<br />
 x.07.23 - x.08.23 - Refaktoring<br />
 x.09.23 - Prvé stránky textu, optimalizácia pipeline<br />
-x.10.23 - Loop/Alt.. fragmenty<br />
-x.11.23 - Alternativny tok ?(podľa progressu)<br /><br />
+x.10.23 - Pridanie nového nlp engine, a pridanie všetkych existujúcich konfigurácií aj pre tento engine
+x.11.23 - datasety, evaluacia, evaluačny script, písanie
+x.12.23 - Preskúmať možnosť parametrizácie správ + písanie
 
+**Future work:**<br />
+x.1.24 - Loop/Alt.. fragmenty, vylepšovanie vysledkov<br />
+x.2.24 - Algoritmus na nájdenie najlepšie konfiguracie<br />
+x.3.24 - Alternativny tok ?(podľa progressu)<br />
+x.4.24 - Písanie textu práce<br />
 **Prezentácia:** V repozitári.<br />
 **PDF:** V repozitári.<br />
 **Kostra latexu:** V repozitári.<br /><br />
 
-**Progress:**<br />
+**Progress - jún.2023:**<br />
+
 Pipeline je rozdelená na 3 časti. Každá časť spracováva Use Case inout metódou NLP.<br />
 Ukážková veta: System displays a list of discount offers.<br />
 <br />
@@ -63,7 +68,13 @@ Ukážkový prípad použitia: <br /> <br />
 6. System inserts discount offer to basket. <br /> <br /> 
 
 Výsledok Part of speech časti Pipeliny : <br />
-![POS pipeline](pipeline.png)<br /><br /><br />
+![POS pipeline - 06.2023](pipeline.png)<br /><br /><br />
+
+**Progress - december.2023:**<br />
+Ako sme videli pri pipeline z júna, nie všetky správy boli identifikované správne. Na vine bol NLP engine a model, ktorý nesprávne identifikoval gramatické kategórie slova. 
+
+Výsledok Part of speech časti Pipeliny : <br />
+![POS pipeline - 12.2023](pipeline.png)<br /><br /><br />
 
 **Literatúra:**<br />
 Deva Kumar Deeptimahanti a Muhammad Ali Babar. „An automated tool for generating UML models from natural language requirements“. In: 2009 IEEE/ACM
