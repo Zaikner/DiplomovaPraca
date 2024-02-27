@@ -1,14 +1,18 @@
+import sys
+
+from PyQt5.QtWidgets import QApplication
+
 from DiplomovaPraca.Configuration import Configuration
 from DiplomovaPraca.ConversionPipeline import ConversionPipeline
 from DiplomovaPraca.Evaluator import Evaluator
 from DiplomovaPraca.utilities import readFile
+from MainWindow import MainWindow
 
-
-conf = Configuration()
-conf.engine = 'spacy'
-conf.mode = 'DP'
-conf.coreference = True
-conf.mode = 'POS'
+app = QApplication(sys.argv)
+MainWindow = MainWindow()
+MainWindow.show()
 #pipe = ConversionPipeline(('').join(readFile('Dataset/UseCase0.txt')),conf)
 #Evalute().evaluate("Dataset/PlantUml0F.txt","output.puml")
-Evaluator().evaluate_everything('Dataset/UseCase0.txt',"Dataset/PlantUml0F.txt")
+
+sys.exit(app.exec_())
+

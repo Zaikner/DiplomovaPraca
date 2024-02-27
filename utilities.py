@@ -4,6 +4,10 @@ def readFile(name):
         lines = f.readlines()
         return [l.strip()[3:] for l in lines]
 
+def readFilePlain(name):
+    with open(name) as f:
+        lines = f.readlines()
+        return [l.strip()+'\n' for l in lines]
 
 def init_tokens():
     ret = []

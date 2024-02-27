@@ -24,7 +24,7 @@ class Evaluator:
         print('Text similarity F1 score was: ' + str(f4))
         return [f1, f2, f3, f4]
 
-    def evaluate_everything(self, source, target, project=False, steps=False):
+    def evaluate_everything(self, text, target, project=False, steps=False):
         self.purge_meta_data()
         project_options = [False, project]
         coreference_options = [True, False]
@@ -56,7 +56,7 @@ class Evaluator:
                                     conf.processors = processors
                                     conf.model = model
 
-                                    res = ConversionPipeline(('').join(readFile(source)), conf)
+                                    res = ConversionPipeline(('').join(text), conf)
                                     self.lastMetadata['Date'] = datetime.now()
                                     self.lastMetadata['project'] = p
                                     self.lastMetadata['coreference'] = c

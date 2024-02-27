@@ -6,16 +6,23 @@ import requests
 from DiplomovaPraca.Drawer import Drawer
 import spacy.cli
 
+from DiplomovaPraca.Fragment import Fragment
 from DiplomovaPraca.utilities import init_tokens
-
 
 class ConversionPipeline:
 
     def __init__(self, text, configuration):
         self.text = text
+        self.sentences = []
+        self.fragments = []
+        self.lastFragment = None
         self.configuration = configuration
         self.phrases = {}
         self.tokens = init_tokens()
+
+        self.sentences = text.strip().split('.')
+        if len(self.sentences[-1]) == 0:
+            self.sentences = self.sentences[:len(self.sentences) - 1]
 
         print('Conversion pipeline run with following configuration:')
         print('Project: '+str(configuration.project))
@@ -25,21 +32,15 @@ class ConversionPipeline:
         print('Processors: [' + ", ".join(self.configuration.processors) + ']')
         print('Mode: '+str(configuration.mode))
 
-        if self.configuration.steps:
-            res = self.run_with_steps(text)
-            if (res!=False):
-                d = Drawer(res)
-                d.create_PlantUml()
-
-        else:
-            res = self.run_without_steps(text)
+    def run(self):
+        if not self.configuration.steps:
+            res = self.run_without_steps()
 
             if (res != False):
                 d = Drawer(res)
                 d.create_PlantUml()
 
     def replace_phrases(self, sentence):
-        number_of_phrases = len(self.phrases)
         if sentence.count('\"') % 2 != 0:
             raise 'Number of quotes in sentence is wrong'
 
@@ -69,7 +70,6 @@ class ConversionPipeline:
 
         for token in self.phrases.keys():
             sentence = sentence.replace(self.phrases[token],token)
-        print(sentence)
         return sentence
 
     def replace_tokens(self,sentence):
@@ -83,24 +83,80 @@ class ConversionPipeline:
                 return True
         return False
 
-    def run_without_steps(self, text):
-        print(text)
-        sentences = text.strip().split('.')
-        if len(sentences[-1]) == 0:
-            sentences = sentences[:len(sentences) - 1]
+    def remove_fragment_keywords(self):
+        new_senteces = []
+        for sentence in self.sentences:
+            if not '|' in sentence:
+                new_senteces.append(sentence)
+            self.sentences = new_senteces
+
+    def detect_fragments(self):
+        i = 1
+        new_senteces = []
+        for sentence in self.sentences:
+            if '|' in sentence:
+                print('nasiel fragment')
+                print(sentence.split('|'))
+                # if len(sentence.split()) == 2:
+                fragment = sentence.split('|')[1].strip()
+                if fragment.lower() == 'alt':
+                    self.lastFragment = Fragment('alt',len(self.fragments),i)
+                    self.fragments.append(self.lastFragment)
+                    print('Alt fragment')
+                elif fragment.lower() == 'par':
+                    self.lastFragment = Fragment('par', len(self.fragments), i)
+                    self.fragments.append(self.lastFragment)
+                    print('Par fragment')
+                elif fragment.lower() == 'opt':
+                    self.lastFragment = Fragment('opt', len(self.fragments), i)
+                    self.fragments.append(self.lastFragment)
+                    print('opt fragment')
+                elif fragment.lower() == 'seq':
+                    self.lastFragment = Fragment('seq', len(self.fragments), i)
+                    self.fragments.append(self.lastFragment)
+                    print('seq fragment')
+                elif fragment.lower() == 'end':
+                    num = 0
+                    stop = False;
+                    while num < len(self.fragments) and not stop:
+                        if not self.fragments[num].ended:
+                            print('Prvy nestopnuty'+self.fragments[num].type)
+                            self.fragments[num].ended = True
+                            self.fragments[num].end_sentence = i
+                            stop = True;
+                            print('Prvy nestopnuty' +str(i))
+                        num+=1
+                    print('tu to ukoncit')
+                else:
+                    print('WRONG fragment')
+                    print(sentence)
+            else:
+                i += 1
+                new_senteces.append(sentence)
+            self.sentences = new_senteces
+
+
+
+    def run_without_steps(self):
+        if self.configuration.keywords:
+            self.detect_fragments()
+        else:
+            self.remove_fragment_keywords()
+
         self.solutions = {}
+        self.solutions['fragments'] = self.fragments
         num = 0
-        for i in range(len(sentences)):
-            sentences[i] = self.replace_phrases(sentences[i])
+        for i in range(len(self.sentences)):
+            self.sentences[i] = self.replace_phrases(self.sentences[i])
 
         if self.configuration.engine == 'stanza':
 
             self.nlp = stanza.Pipeline(lang='en', processors=self.configuration.processors)
-            text = ". ".join(sentences)
+            text = ". ".join(self.sentences)
             doc = self.nlp(text)
             sentences = doc.sentences
 
-        for sentence in sentences:
+        for sentence in self.sentences:
             result = []
             if self.configuration.engine == 'spacy':
                 if self.configuration.processors == ['all']:
@@ -118,9 +174,9 @@ class ConversionPipeline:
             elif self.configuration.engine == 'stanza':
 
                 if self.configuration.mode == 'POS':
-                    result = self.partOfSpeechPipeline(sentence)
+                    result = self.partOfSpeechPipelineStanza(sentence)
                 elif self.configuration.mode == 'DP':
-                    result = self.dependencyTreePipeline(sentence)
+                    result = self.dependencyTreePipelineStanza(sentence)
                 elif self.configuration.mode == 'OIE':
                     result = self.openInformationExtractionPipeline(sentence)
 
@@ -136,9 +192,6 @@ class ConversionPipeline:
             self.solutions[num]['objects'] = result[3]
             self.solutions[num]['relations'] = result[2]
 
-        print('tu to printim')
-        print(self.solutions)
-
         # if (self.configuration.coreference):
         #     #TODO: REFACTOR
         #     all = []
@@ -146,254 +199,9 @@ class ConversionPipeline:
         #     self.solveCoReference('subjects')
         #     self.solveCoReference('objects')
         #     self.solveCoReference('relations')
-        print('tu to printim zas')
-        print(self.solutions)
+        # print('COREFERENCIE NEFUNGUJU')
+        # print(self.solutions)
         return self.solutions
-
-    #     for sentence in sentences:
-    #         print(self.partOfSpeechPipelineSpacy(sentence))
-    # 
-    #     num = 0
-    #     self.solutions = {}
-    #     for sent in doc.sentences:
-    #         num += 1
-    #         self.solutions[num] = {}
-    #         self.solutions[num]['subjects'] = {}
-    #         self.solutions[num]['objects'] = {}
-    #         self.solutions[num]['relations'] = {}
-    #         if (self.mode in ['all', 'OIE']):
-    #             res = self.openInformationExtractionPipeline(sent)
-    #             found = False
-    #             if self.project != None:
-    #                 for sub in self.project.subjects:
-    #                     if sub in sentences[num - 1]:
-    #                         self.solutions[num]['subjects']['OIE'] = sub
-    #                         found = True
-    # 
-    #             if not found:
-    #                 self.solutions[num]['subjects']['OIE'] = res[1]
-    # 
-    #             found = False
-    #             if self.project != None:
-    #                 for rel in self.project.relations:
-    #                     if rel in sentences[num - 1]:
-    #                         self.solutions[num]['relations']['OIE'] = rel
-    #                         found = True
-    # 
-    #             if not found:
-    #                 self.solutions[num]['relations']['OIE'] = res[2]
-    # 
-    #             found = False
-    #             if self.project != None:
-    #                 for obj in self.project.objects:
-    #                     if obj in sentences[num - 1]:
-    #                         self.solutions[num]['objects']['OIE'] = obj
-    #                         found = True
-    # 
-    #             if not found:
-    #                 self.solutions[num]['objects']['OIE'] = res[3]
-    #             resp = 'OIE: ' + self.solutions[num]['subjects']['OIE'] + '-->' + self.solutions[num]['relations'][
-    #                 'OIE'] + '-->' + self.solutions[num]['objects']['OIE']
-    # 
-    #             print(resp)
-    #         if (self.mode in ['all', 'DP']):
-    #             res = self.dependencyTreePipeline(sent)
-    #             found = False
-    #             if self.project != None:
-    #                 for sub in self.project.subjects:
-    #                     if sub in sentences[num - 1]:
-    #                         self.solutions[num]['subjects']['Dependency parsing'] = sub
-    #                         found = True
-    # 
-    #             if not found:
-    #                 self.solutions[num]['subjects']['Dependency parsing'] = res[1]
-    # 
-    #             found = False
-    #             if self.project != None:
-    #                 for rel in self.project.relations:
-    #                     if rel in sentences[num - 1]:
-    #                         self.solutions[num]['relations']['Dependency parsing'] = rel
-    #                         found = True
-    # 
-    #             if not found:
-    #                 self.solutions[num]['relations']['Dependency parsing'] = res[2]
-    # 
-    #             found = False
-    #             if self.project != None:
-    #                 for obj in self.project.objects:
-    #                     if obj in sentences[num - 1]:
-    #                         self.solutions[num]['objects']['Dependency parsing'] = obj
-    #                         found = True
-    # 
-    #             if not found:
-    #                 self.solutions[num]['objects']['Dependency parsing'] = res[3]
-    # 
-    #             resp = 'Dependency parsing: ' + self.solutions[num]['subjects']['Dependency parsing'] + '-->' + \
-    #                    self.solutions[num]['relations'][
-    #                        'Dependency parsing'] + '-->' + self.solutions[num]['objects']['Dependency parsing']
-    # 
-    #             print(resp)
-    #         if (self.mode in ['all', 'POS']):
-    #             res = self.partOfSpeechPipeline(sent)
-    #             found = False
-    #             if self.project != None:
-    #                 for sub in self.project.subjects:
-    #                     if sub in sentences[num - 1]:
-    #                         self.solutions[num]['subjects']['POS'] = sub
-    #                         found = True
-    # 
-    #             if not found:
-    #                 self.solutions[num]['subjects']['POS'] = res[1]
-    # 
-    #             found = False
-    #             if self.project != None:
-    #                 for rel in self.project.relations:
-    #                     if rel in sentences[num - 1]:
-    #                         self.solutions[num]['relations']['POS'] = rel
-    #                         found = True
-    # 
-    #             if not found:
-    #                 self.solutions[num]['relations']['POS'] = res[2]
-    # 
-    #             found = False
-    #             if self.project != None:
-    #                 for obj in self.project.objects:
-    #                     if obj in sentences[num - 1]:
-    #                         self.solutions[num]['objects']['POS'] = obj
-    #                         found = True
-    # 
-    #             if not found:
-    #                 self.solutions[num]['objects']['POS'] = res[3]
-    # 
-    #             resp = 'POS: ' + self.solutions[num]['subjects']['POS'] + '-->' + self.solutions[num]['relations'][
-    #                 'POS'] + '-->' + self.solutions[num]['objects']['POS']
-    #             print(resp)
-    # 
-    #     print(self.solutions)
-    #     if (self.coreference):
-    #         all = []
-    #         for i in range(1, num + 1):
-    #             for j in self.solutions[i]['subjects'].values():
-    #                 all.append(j)
-    # 
-    #         # print('tu')
-    #         # print(all)
-    #         self.solveCoReference(all)
-    # 
-    #     return self.solutions
-    # 
-    # def run_with_steps(self, text):
-    #     nlp = stanza.Pipeline(lang='en', processors='tokenize,mwt,pos,lemma,depparse')
-    #     doc = nlp(text)
-    # 
-    #     num = 0
-    #     self.solutions = {}
-    #     for sent in doc.sentences:
-    #         num += 1
-    #         possibilities = {}
-    #         self.solutions[num] = {}
-    #         self.solutions[num]['subjects'] = {}
-    #         self.solutions[num]['objects'] = {}
-    #         self.solutions[num]['relations'] = {}
-    #         possibilities['subjects'] = {}
-    #         possibilities['objects'] = {}
-    #         possibilities['relations'] = {}
-    #         if (self.mode in ['all', 'OIE']):
-    #             res = self.openInformationExtractionPipeline(sent)
-    #             resp = 'OIE : ' + res[1] + '-->' + res[2] + '-->' + res[3]
-    #             possibilities['subjects']['OIE'] = res[1]
-    #             possibilities['relations']['OIE'] = res[2]
-    #             possibilities['objects']['OIE'] = res[3]
-    #         if (self.mode in ['all', 'DP']):
-    #             res = self.dependencyTreePipeline(sent)
-    #             resp = 'Dependency parsing : ' + res[1] + '-->' + res[2] + '-->' + res[3]
-    #             possibilities['subjects']['Dependency parsing'] = res[1]
-    #             possibilities['relations']['Dependency parsing'] = res[2]
-    #             possibilities['objects']['Dependency parsing'] = res[3]
-    #         if (self.mode in ['all', 'POS']):
-    #             res = self.partOfSpeechPipeline(sent)
-    #             resp = 'POS: ' + res[1] + '-->' + res[2] + '-->' + res[3]
-    #             possibilities['subjects']['POS'] = res[1]
-    #             possibilities['relations']['POS'] = res[2]
-    #             possibilities['objects']['POS'] = res[3]
-    # 
-    #         choice = 0
-    # 
-    #         while choice not in [1, 2, 3]:
-    #             try:
-    #                 print('1. ' + possibilities['subjects']['OIE'])
-    #                 print('2. ' + possibilities['subjects']['Dependency parsing'])
-    #                 print('3. ' + possibilities['subjects']['POS'])
-    #                 choice = int(input('Choose your subject, write number of your choice:'))
-    #                 if choice not in [1, 2, 3]:
-    #                     print('YOU SHOULD WROTE ONE NUMBER 1,2 OR 3 !')
-    #             except:
-    #                 print('YOU SHOULD WROTE ONE NUMBER 1,2 OR 3 !')
-    # 
-    #         if (choice == 1):
-    #             print('YOU HAVE CHOSEN ' + possibilities['subjects']['OIE'] + ' AS SUBJECT!')
-    #             self.solutions[num]['subjects'] = possibilities['subjects']['OIE']
-    #         if (choice == 2):
-    #             print('YOU HAVE CHOSEN ' + possibilities['subjects']['Dependency parsing'] + ' AS SUBJECT!')
-    #             self.solutions[num]['subjects'] = possibilities['subjects']['Dependency parsing']
-    #         if (choice == 3):
-    #             print('YOU HAVE CHOSEN ' + possibilities['subjects']['POS'] + ' AS SUBJECT!')
-    #             self.solutions[num]['subjects'] = possibilities['subjects']['POS']
-    #         choice = 0
-    #         while choice not in [1, 2, 3]:
-    #             try:
-    #                 print('1. ' + possibilities['relations']['OIE'])
-    #                 print('2. ' + possibilities['relations']['Dependency parsing'])
-    #                 print('3. ' + possibilities['relations']['POS'])
-    #                 choice = int(input('Choose your relation, write number of your choice:'))
-    #                 if choice not in [1, 2, 3]:
-    #                     print('YOU SHOULD WROTE ONE NUMBER 1,2 OR 3 !')
-    #             except:
-    #                 print('YOU SHOULD WROTE ONE NUMBER 1,2 OR 3 !')
-    # 
-    #         if (choice == 1):
-    #             print('YOU HAVE CHOSEN ' + possibilities['relations']['OIE'] + ' AS RELATION!')
-    #             self.solutions[num]['relations'] = possibilities['relations']['OIE']
-    #         if (choice == 2):
-    #             print('YOU HAVE CHOSEN ' + possibilities['relations']['Dependency parsing'] + ' AS RELATION!')
-    #             self.solutions[num]['relations'] = possibilities['relations']['Dependency parsing']
-    #         if (choice == 3):
-    #             print('YOU HAVE CHOSEN ' + possibilities['relations']['POS'] + ' AS RELATION!')
-    #             self.solutions[num]['relations'] = possibilities['relations']['POS']
-    #         choice = 0
-    #         while choice not in [1, 2, 3]:
-    #             try:
-    #                 print('1. ' + possibilities['objects']['OIE'])
-    #                 print('2. ' + possibilities['objects']['Dependency parsing'])
-    #                 print('3. ' + possibilities['objects']['POS'])
-    #                 choice = int(input('Choose your object, write number of your choice:'))
-    #                 if choice not in [1, 2, 3]:
-    #                     print('YOU SHOULD WROTE ONE NUMBER 1,2 OR 3 !')
-    #             except:
-    #                 print('YOU SHOULD WROTE ONE NUMBER 1,2 OR 3 !')
-    # 
-    #         if (choice == 1):
-    #             print('YOU HAVE CHOSEN ' + possibilities['objects']['OIE'] + ' AS OBJECT!')
-    #             self.solutions[num]['objects'] = possibilities['objects']['OIE']
-    #         if (choice == 2):
-    #             print('YOU HAVE CHOSEN ' + possibilities['objects']['Dependency parsing'] + ' AS OBJECT!')
-    #             self.solutions[num]['objects'] = possibilities['objects']['Dependency parsing']
-    #         if (choice == 3):
-    #             print('YOU HAVE CHOSEN ' + possibilities['objects']['POS'] + ' AS OBJECT!')
-    #             self.solutions[num]['objects'] = possibilities['objects']['POS']
-    # 
-    #     print(self.solutions)
-    #     if (self.coreference):
-    #         all = []
-    #         for i in range(1, num + 1):
-    #             print(self.solutions[i]['subjects'])
-    #             all.append(self.solutions[i]['subjects'])
-    # 
-    #         print('tu')
-    #         print(all)
-    #         print(self.solveCoReference(all))
-    #     return resp
-    #
 
 
     def openInformationExtractionPipeline(self, sent):
@@ -443,7 +251,7 @@ class ConversionPipeline:
 
         return [True, ' '.join(subjects), ' '.join(relations), ' '.join(objects)]
 
-    def partOfSpeechPipeline(self, sent):
+    def partOfSpeechPipelineStanza(self, sent):
 
         subjects = []
         objects = []
@@ -552,7 +360,7 @@ class ConversionPipeline:
                    [objects.append(tt.text) for tt in [t for t in token.children][-1].subtree]
 
         return [True, ' '.join(subjects), ' '.join(relations), ' '.join(objects)]
-    def dependencyTreePipeline(self, sent):
+    def dependencyTreePipelineStanza(self, sent):
         subjects = []
         objects = []
         relations = []

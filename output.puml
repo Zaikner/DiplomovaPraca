@@ -1,16 +1,16 @@
 @startuml
 actor System
 actor Customer
-participant a_list_of_discount_offers
-System --> a_list_of_discount_offers: displays
-participant a_specific_discount_offer
-Customer --> a_specific_discount_offer: chooses
-participant the_discount_offer_details
-System --> the_discount_offer_details: displays
+participant list_of_discount_offers
+System --> list_of_discount_offers: displays
+participant discount_offer
+Customer --> discount_offer: chooses
+participant discount_offer_details
+System --> discount_offer_details: displays
 participant on_Add_to_basket_button
 Customer --> on_Add_to_basket_button: clicks
-participant number_of_available_discount_offers
-System --> number_of_available_discount_offers: checks
-participant to_basket
-System --> to_basket: inserts_offer
+participant number_of_discount_offers
+System --> number_of_discount_offers: checks
+participant discount_offer_to_basket
+System --> discount_offer_to_basket: inserts
 @enduml
