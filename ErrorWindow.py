@@ -27,3 +27,7 @@ class ErrorWindow(QMainWindow):
     def error(self,text):
         self.label.setText(text)
         self.show()
+
+
+    def closeEvent(self, event):
+        event.ignore()  # Ignore the close event

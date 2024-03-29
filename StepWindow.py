@@ -10,6 +10,7 @@ class StepWindow(QDialog):
         self.setWindowTitle('Step window')
         self.resize(300, 300)
         self.option = ''
+        self.quit = False
         self.show()
 
     def generate_options(self,sentence,pos_option,dp_option,oie_option,loop):
@@ -50,6 +51,10 @@ class StepWindow(QDialog):
         self.layout.addWidget(self.oieCheckBox)
         # self.layout.addWidget(self.choose_button)
 
+        self.button_close = QPushButton("Close window", self)
+        self.button_close.clicked.connect(self.closeWindow)
+        self.layout.addWidget(self.button_close)
+
         self.show()
 
     def pos(self):
@@ -66,5 +71,13 @@ class StepWindow(QDialog):
 
     def dp(self):
         self.option = self.dp_option
+        self.loop.quit()
+
+
+    def closeEvent(self, event):
+        event.ignore()  # Ignore the close event
+
+    def closeWindow(self,state):
+        self.quit = True
         self.loop.quit()
 

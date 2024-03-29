@@ -5,3 +5,4 @@ class Fragment:
        self.end_sentence = start_sentence
        self.fragment_number = fragment_number
        self.ended = False
+       self.text = ''

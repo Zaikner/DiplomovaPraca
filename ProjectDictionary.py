@@ -13,13 +13,15 @@ class ProjectDictionary:
             self.data[i]['relation'] = []
 
     def assign_object_to_sentence(self,sentence_number, object):
-        self.data[sentence_number]['object'].append(object)
-
+        for i in object:
+            self.data[sentence_number]['object'].append(i)
     def assign_relation_to_sentence(self, sentence_number, relation):
-        self.data[sentence_number]['relation'].append(relation)
+        for i in relation:
+            self.data[sentence_number]['relation'].append(i)
 
     def assign_subject_to_sentence(self,sentence_number,subject):
-        self.data[sentence_number]['subject'].append(subject)
+        for i in subject:
+            self.data[sentence_number]['subject'].append(i)
 
     def assign_all_to_sentence(self, sentence_number, element):
         self.data[sentence_number]['subject'].append(element)

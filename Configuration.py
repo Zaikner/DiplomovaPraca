@@ -1,7 +1,9 @@
 class Configuration:
     def __init__(self):
         self.text = ''
-        self.project = False
+        self.system = 'system'
+        self.users = {}
+        self.project = None
         self.coreference = False
         self.steps = False
         self.engine = 'spacy'
@@ -9,5 +11,7 @@ class Configuration:
         self.processors = ['all']
         self.model = 'en_core_web_lg'
         self.fragments = False
-        self.keywords = False
+        self.fragmentPattern = None
+        self.parameters = False
+        self.pattern = None
 

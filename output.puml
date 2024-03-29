@@ -1,16 +1,21 @@
 @startuml
-actor System
-actor Customer
-participant list_of_discount_offers
-System --> list_of_discount_offers: displays
-participant discount_offer
-Customer --> discount_offer: chooses
-participant discount_offer_details
-System --> discount_offer_details: displays
-participant on_Add_to_basket_button
-Customer --> on_Add_to_basket_button: clicks
-participant number_of_discount_offers
-System --> number_of_discount_offers: checks
-participant discount_offer_to_basket
-System --> discount_offer_to_basket: inserts
+actor customer
+actor customer
+participant checks_system_discount_of_available
+activate checks_system_discount_of_available
+participant a_offers_of_discount_list
+checks_system_discount_of_available -> a_offers_of_discount_list: display()
+activate a_offers_of_discount_list
+deactivate a_offers_of_discount_list
+customer -> checks_system_discount_of_available: choose_a specific discount offer()
+activate customer
+participant details
+checks_system_discount_of_available -> details: offer()
+activate details
+deactivate details
+customer -> checks_system_discount_of_available: click_on add to basket button()
+participant checks_system_discount_of_available_checks_system_discount_of_available
+checks_system_discount_of_available -> checks_system_discount_of_available_checks_system_discount_of_available: offers()
+activate checks_system_discount_of_available_checks_system_discount_of_available
+deactivate checks_system_discount_of_available_checks_system_discount_of_available
 @enduml
